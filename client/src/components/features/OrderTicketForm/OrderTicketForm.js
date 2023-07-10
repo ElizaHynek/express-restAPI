@@ -1,7 +1,7 @@
 import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from 'reactstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSeatRequest, getRequests } from '../../../redux/seatsRedux';
+import { addSeatRequest, getRequests, loadSeatsRequest } from '../../../redux/seatsRedux';
 
 import './OrderTicketForm.scss';
 import SeatChooser from './../SeatChooser/SeatChooser';
@@ -11,6 +11,7 @@ const OrderTicketForm = () => {
   const requests = useSelector(getRequests);
   console.log(requests);
 
+
   const [order, setOrder] = useState({
     client: '',
     email: '',
@@ -18,6 +19,12 @@ const OrderTicketForm = () => {
     seat: ''
   });
   const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    if (order.client && order.email && order.day) {
+      dispatch(loadSeatsRequest());
+    }
+  }, [order, dispatch]);
 
   const updateSeat = (e, seatId) => {
     e.preventDefault();
@@ -38,7 +45,8 @@ const OrderTicketForm = () => {
     e.preventDefault();
 
     if(order.client && order.email && order.day && order.seat) {
-      dispatch(addSeatRequest(order));
+      await dispatch(addSeatRequest(order));
+      dispatch(loadSeatsRequest());
       setOrder({
         client: '',
         email: '',
