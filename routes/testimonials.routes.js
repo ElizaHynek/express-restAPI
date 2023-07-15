@@ -16,10 +16,10 @@ router.route('/testimonials/:id').get((req, res) => {
 });
 
 router.route('/testimonials').post((req, res) => {
-	//const { author, text } = req.body;
-	//const id = uuid();
-	//const newTestimonial = { id: id, author: author, text: text };
-	//db.testimonials.push(newTestimonial);
+	const { author, text } = req.body;
+	const id = uuid();
+	const newTestimonial = { id: id, author: author, text: text };
+	db.testimonials.push(newTestimonial);
 	res.json({ message: 'ok!' });
 });
 

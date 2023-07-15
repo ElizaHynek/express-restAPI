@@ -2,6 +2,7 @@ import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSeatRequest, getRequests, loadSeatsRequest } from '../../../redux/seatsRedux';
+//import io from 'socket.io-client';
 
 import './OrderTicketForm.scss';
 import SeatChooser from './../SeatChooser/SeatChooser';
@@ -58,6 +59,31 @@ const OrderTicketForm = () => {
       setIsError(true);
     }
   }
+
+  /* 
+  const [socket, setSocket] = useState('');
+
+  useEffect((removeTask) => {
+    const socket = io("http://localhost:8000");
+    setSocket(socket);
+    
+    socket.on('seatsUpdated', (tasks) => {
+      seatsUpdated(tasks);
+    });
+
+
+  }, []);
+
+  const seatsUpdated = (tasksData) => {
+    //setTasks(tasksData);
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    const task = {};
+    socket.emit('seatsUpdated', task);
+  };
+  */
 
   return (
     <Form className="order-ticket-form" onSubmit={submitForm}>
