@@ -17,6 +17,11 @@ const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -36,12 +41,4 @@ app.use((req, res) => {
 
 io.on('connection', (socket) => {
   console.log('New socket ' + socket.id);
-  //socket.emit('seatsUpdated', tasks);
-/*
-  socket.on('addTask', (task) => {
-    console.log('Task added');
-    tasks.push(task);
-    socket.broadcast.emit('addTask', task);
-  }); */
-
 });
