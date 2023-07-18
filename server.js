@@ -45,7 +45,8 @@ io.on('connection', (socket) => {
 });
 
 //mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true }); uhXvT3StoJPUvtFB
-mongoose.connect('mongodb+srv://elizunia:uhXvT3StoJPUvtFB@cluster0.letdqgu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://elizunia:uhXvT3StoJPUvtFB@cluster0.letdqgu.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
+
 const db = mongoose.connection;
 
 db.once('open', () => {
