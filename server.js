@@ -5,6 +5,7 @@ const router = express.Router();
 const path = require('path');
 const mongoose = require('mongoose');
 const socket = require('socket.io');
+const helmet = require('helmet');
 
 
 const testimonialsRoutes = require('./routes/testimonials.routes');
@@ -12,6 +13,7 @@ const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
 const app = express();
+app.use(helmet());
 
 app.use((req, res, next) => {
   req.io = io;
@@ -44,7 +46,7 @@ io.on('connection', (socket) => {
   console.log('New socket ' + socket.id);
 });
 
-//mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true }); uhXvT3StoJPUvtFB
+//mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true }); //uhXvT3StoJPUvtFB
 mongoose.connect('mongodb+srv://elizunia:uhXvT3StoJPUvtFB@cluster0.letdqgu.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
 
 const db = mongoose.connection;
